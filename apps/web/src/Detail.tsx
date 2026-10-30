@@ -1,6 +1,6 @@
 import { ArrowUpRight, Check, EyeOff, X } from 'lucide-react';
 
-import { RankedTitle, WatchState } from '@shukannia/domain';
+import type { RankedTitle, WatchState } from '@shukannia/domain';
 
 import { number } from './utils.js';
 export function Detail({

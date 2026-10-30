@@ -1,7 +1,8 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { Kysely, sql } from 'kysely';
+import type { Kysely } from 'kysely';
+import { sql } from 'kysely';
 import { z } from 'zod';
 
 import {
@@ -16,7 +17,8 @@ import {
   WatchState,
 } from '@shukannia/domain';
 
-import { connect, Database, dataDir } from './connection.js';
+import type { Database } from './connection.js';
+import { connect, dataDir } from './connection.js';
 export { connect, dataDir, migrateCatalog } from './connection.js';
 export async function userDb(dir = dataDir()): Promise<Kysely<Database>> {
   await mkdir(dir, { recursive: true });

@@ -1,7 +1,7 @@
 import { Check, Clock3, Layers3 } from 'lucide-react';
 
 import { Metric } from './Metric.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { number } from './utils.js';
 export function TimelineMetrics({ model }: { model: AppModel }) {
   const { result, movieCount, episodeCount, firstYear, lastYear } = model;

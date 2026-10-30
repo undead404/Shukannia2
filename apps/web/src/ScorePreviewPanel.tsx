@@ -1,6 +1,6 @@
-import { GenerateResponse } from '@shukannia/domain';
+import type { GenerateResponse } from '@shukannia/domain';
 
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { compact } from './utils.js';
 export function ScorePreviewPanel({ model }: { model: AppModel }) {
   const { preview } = model;

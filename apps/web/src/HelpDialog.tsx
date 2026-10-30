@@ -1,6 +1,6 @@
 import { X } from 'lucide-react';
 
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function HelpDialog({ model }: { model: AppModel }) {
   const { setHelp } = model;
   return (

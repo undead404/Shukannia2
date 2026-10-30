@@ -1,4 +1,4 @@
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { number } from './utils.js';
 export function CatalogHealth({ model }: { model: AppModel }) {
   const { boot, config, result, effective } = model;

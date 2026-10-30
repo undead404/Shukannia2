@@ -1,8 +1,8 @@
 import { ArrowUpRight, Check, Film, Tv } from 'lucide-react';
 
-import { RankedTitle } from '@shukannia/domain';
+import type { RankedTitle } from '@shukannia/domain';
 
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { compact } from './utils.js';
 export function StoryCard({ model, t }: { model: AppModel; t: RankedTitle }) {
   const { setDetail, changeState } = model;

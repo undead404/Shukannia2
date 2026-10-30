@@ -1,4 +1,4 @@
-import { RankedTitle } from '@shukannia/domain';
+import type { RankedTitle } from '@shukannia/domain';
 
 import { compact, number } from './utils.js';
 export function ScoreDistribution({ items }: { items: RankedTitle[] }) {

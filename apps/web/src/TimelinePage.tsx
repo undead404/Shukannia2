@@ -8,7 +8,7 @@ import {
 import { JourneySummary } from './JourneySummary.js';
 import { TimelineMetrics } from './TimelineMetrics.js';
 import { TimelineSection } from './TimelineSection.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function TimelinePage({ model }: { model: AppModel }) {
   const { boot, setBuilder, busy, run } = model;
   return (

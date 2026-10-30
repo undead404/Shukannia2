@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { z } from 'zod';
+import type { z } from 'zod';
 
+import type { RankedTitle } from '@shukannia/domain';
 import {
   Backup,
   Bootstrap,
   GenerateResponse,
-  RankedTitle,
   ScorePreview,
   Watchlist,
   WatchState,

@@ -12,7 +12,7 @@ import { Watchlist } from '@shukannia/domain';
 import { GenreFields } from './GenreFields.js';
 import { RankingFields } from './RankingFields.js';
 import { ScorePreviewPanel } from './ScorePreviewPanel.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { WeightFields } from './WeightFields.js';
 export function WatchlistBuilder({ model }: { model: AppModel }) {
   const {

@@ -1,7 +1,7 @@
 import { History } from 'lucide-react';
 
 import { HistoryRow } from './HistoryRow.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function HistoryPage({ model }: { model: AppModel }) {
   const { boot, result, changeState } = model;
   return (

@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react';
 
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function GenreFields({ model }: { model: AppModel }) {
   const { boot, config, setConfig } = model;
   return (

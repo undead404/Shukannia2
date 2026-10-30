@@ -26,6 +26,9 @@ export default tseslint.config(
   {
     files: ['**/*.{ts,tsx}'],
     extends: [tseslint.configs.recommendedTypeChecked],
+    rules: {
+      '@typescript-eslint/consistent-type-imports': 'error',
+    },
     languageOptions: {
       parserOptions: {
         projectService: true,

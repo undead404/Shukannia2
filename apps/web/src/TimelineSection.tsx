@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowDownToLine, ListFilter, Search } from 'lucide-react';
 
 import { TimelineContents } from './TimelineContents.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { download, number } from './utils.js';
 export function TimelineSection({ model }: { model: AppModel }) {
   const {

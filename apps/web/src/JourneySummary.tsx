@@ -1,6 +1,6 @@
 import { Film, Settings2, Sparkles } from 'lucide-react';
 
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { number } from './utils.js';
 export function JourneySummary({ model }: { model: AppModel }) {
   const { config, setBuilder, effective } = model;

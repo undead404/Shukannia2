@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 
 import { StoryCard } from './StoryCard.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function TimelineContents({ model }: { model: AppModel }) {
   const { boot, setBuilder, busy, demo, items, groups } = model;
   return !boot ? (

@@ -1,7 +1,7 @@
 import { CatalogHealth } from './CatalogHealth.js';
 import { CatalogMetrics } from './CatalogMetrics.js';
 import { ScoreDistribution } from './ScoreDistribution.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { number } from './utils.js';
 export function DiagnosticsPage({ model }: { model: AppModel }) {
   const { boot, result } = model;

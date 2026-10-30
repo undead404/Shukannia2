@@ -1,4 +1,4 @@
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 export function WeightFields({ model }: { model: AppModel }) {
   const { config, setConfig } = model;
   return (

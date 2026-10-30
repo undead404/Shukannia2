@@ -1,7 +1,7 @@
 import { BarChart3, Database } from 'lucide-react';
 
 import { Metric } from './Metric.js';
-import { AppModel } from './useAppModel.js';
+import type { AppModel } from './useAppModel.js';
 import { number } from './utils.js';
 export function CatalogMetrics({ model }: { model: AppModel }) {
   const { boot } = model;
