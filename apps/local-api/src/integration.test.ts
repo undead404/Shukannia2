@@ -72,6 +72,7 @@ describe('catalog, persistence, and local API', () => {
                 hidden: false,
                 personal_rating: null,
                 notes: '',
+                watch_links: [],
               },
             ];
             const actual = await generate(db, w, states);

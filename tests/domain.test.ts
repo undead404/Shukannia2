@@ -149,6 +149,7 @@ describe('original scoring and selection semantics', () => {
         hidden: false,
         personal_rating: null,
         notes: '',
+        watch_links: [],
       },
     ];
     expect(

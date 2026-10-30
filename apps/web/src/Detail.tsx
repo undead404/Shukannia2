@@ -3,11 +3,13 @@ import { ArrowUpRight, Check, EyeOff, X } from 'lucide-react';
 import type { RankedTitle, WatchState } from '@shukannia/domain';
 
 import { number } from './utils.js';
+import { WatchLinks } from './WatchLinks.js';
 export function Detail({
   item,
   state,
   baseline,
   filterOnly,
+  onSaveLinks,
   onClose,
   onChange,
 }: {
@@ -15,6 +17,7 @@ export function Detail({
   state: WatchState | undefined;
   baseline: number;
   filterOnly: boolean;
+  onSaveLinks: (links: string[]) => Promise<boolean>;
   onClose: () => void;
   onChange: (v: Partial<WatchState>) => void;
 }) {
@@ -45,6 +48,7 @@ export function Detail({
             `${item.series_name} · Season ${item.season ?? '?'} · Episode ${item.episode_number ?? '?'} · `}
           {item.original_year ?? 'Year unknown'}
         </p>
+        <WatchLinks links={state?.watch_links ?? []} onSave={onSaveLinks} />
         <dl>
           <dt>Selection rank</dt>
           <dd>#{number(item.rank)} by score</dd>

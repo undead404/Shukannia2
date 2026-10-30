@@ -2218,3 +2218,35 @@ dd {
 .histogram small {
   font-size: 8px;
 }
+
+.watch-links {
+  border-block: 1px solid #dce4d1;
+  padding-block: 16px;
+  margin-block: 20px;
+}
+
+.watch-links fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.watch-link-row,
+.watch-link-actions {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.watch-link-row label {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.watch-link-row input {
+  width: 100%;
+  margin-top: 6px;
+}

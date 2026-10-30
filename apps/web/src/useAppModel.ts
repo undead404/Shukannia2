@@ -101,10 +101,6 @@ export function useAppModel() {
   async function changeState(id: string, patch: Partial<WatchState>) {
     traceTimeline('state-change-started', {
       fields: Object.keys(patch),
-      visibleLimit,
-      configTopN: config.top_n,
-      resultTopN: result?.config.top_n,
-      resultCount: result?.items.length,
     });
     setError('');
     try {
@@ -131,10 +127,14 @@ export function useAppModel() {
       setNotice(
         state.hidden
           ? 'Title hidden from future selections.'
-          : 'Viewing history updated.',
+          : patch.watch_links !== undefined
+            ? 'Watch links saved.'
+            : 'Viewing history updated.',
       );
+      return true;
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
+      return false;
     }
   }
   async function demo() {

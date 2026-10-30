@@ -48,6 +48,20 @@ export const WatchState = z.object({
   hidden: z.boolean(),
   personal_rating: z.number().min(0).max(10).nullable(),
   notes: z.string().max(10000),
+  watch_links: z
+    .array(
+      z
+        .string()
+        .trim()
+        .max(4000)
+        .url()
+        .refine(
+          (value) => /^https?:\/\//i.test(value),
+          'Use an http:// or https:// link',
+        ),
+    )
+    .max(100)
+    .default([]),
 });
 export type WatchState = z.infer<typeof WatchState>;
 export const RankedTitle = Title.extend({

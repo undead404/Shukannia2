@@ -103,11 +103,15 @@ export function App() {
       {builder && <WatchlistBuilder model={model} />}
       {detail && (
         <Detail
+          key={detail.imdb_id}
           item={detail}
           state={boot?.states.find((s) => s.imdb_id === detail.imdb_id)}
           baseline={effective}
           filterOnly={
             config.mode === 'worst' && config.worst_relevance === 'filterOnly'
+          }
+          onSaveLinks={(watch_links) =>
+            changeState(detail.imdb_id, { watch_links })
           }
           onClose={() => setDetail(null)}
           onChange={(patch) => {
