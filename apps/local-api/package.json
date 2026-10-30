@@ -1,1 +1,5 @@
-{"name":"@shukannia/local-api","private":true,"type":"module"}
+{
+  "name": "@shukannia/local-api",
+  "private": true,
+  "type": "module"
+}

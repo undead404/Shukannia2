@@ -90,7 +90,33 @@ An actual catalog shrinking by more than 20% fails activation. After reviewing s
 
 To explicitly erase all user-owned watchlists, history, and generated snapshots, export a backup first, stop the app, then run `pnpm user:reset --confirm`. The confirmation flag is required. Imported catalogs are retained. This action cannot be undone without a backup.
 
-## Workspace
+## Code quality
+
+```sh
+pnpm check         # ESLint, Stylelint, Prettier, and TypeScript
+pnpm lint:fix      # Fix lint issues where possible
+pnpm format        # Format source, styles, configuration, and docs
+pnpm test          # Run the test suite
+```
+
+ESLint uses type-aware TypeScript analysis with the project service, React Hooks
+checks, and sorted imports. ESLint enforces a maximum of 300 nonblank,
+noncomment lines per JavaScript/TypeScript file, cyclomatic complexity of 15 per
+function, and control-flow nesting depth of 4, including tests and configuration.
+Prettier owns formatting (80 columns, single quotes,
+trailing commas), and Stylelint checks CSS. Specificity ordering is left to the
+stylesheet's component and responsive sections because those selectors often
+target separate elements. Generated builds, local data, dependencies, and coverage
+are excluded from these checks.
+
+`pnpm install` installs the Husky pre-commit hook. It runs lint-staged to lint and
+format staged files; `pnpm check` checks the whole workspace. GitHub Actions runs
+the full checks, tests, and production build on pushes and pull requests.
+
+The setup takes inspiration from [ymh8](https://github.com/undead404/ymh8) and
+[Koreni](https://github.com/undead404/koreni), adapted for this pnpm/Vite workspace.
+
+## Workspace layout
 
 ```text
 apps/web          React + Vite interface

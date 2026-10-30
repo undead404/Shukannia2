@@ -1,1 +1,5 @@
-{"name":"@shukannia/ingest","private":true,"type":"module"}
+{
+  "name": "@shukannia/ingest",
+  "private": true,
+  "type": "module"
+}

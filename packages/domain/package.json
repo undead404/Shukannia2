@@ -1,1 +1,5 @@
-{"name":"@shukannia/domain","private":true,"type":"module"}
+{
+  "name": "@shukannia/domain",
+  "private": true,
+  "type": "module"
+}
