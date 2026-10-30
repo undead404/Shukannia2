@@ -1,6 +1,6 @@
 # Shukannia
 
-A personal, local-only movie and individual TV episode discovery app. Select the top N by `votes × (rating − baseline) × relevance`, then browse the selection **chronologically by year**. Popularity is deliberately linear; negative scores are preserved. Series never enter the feed as viewing records, and no prerequisite episodes are added.
+A personal, local-only movie and individual TV episode discovery app. Select the top N by `r × (r < 0 ? |A| : A)`, where `A = votes × (rating − baseline)` and `r` is the sum of matching genre relevances, then browse the selection **chronologically by year**. Popularity is deliberately linear; negative scores are preserved. Series never enter the feed as viewing records, and no prerequisite episodes are added.
 
 ## Requirements & run
 
@@ -78,7 +78,7 @@ An actual catalog shrinking by more than 20% fails activation. After reviewing s
 
 ## Watchlists & history
 
-- Select genres and nonnegative per-watchlist relevance weights. Use the maximum matching weight; unmatched records and zero relevance are excluded.
+- Select genres and signed per-watchlist relevances. Matching relevances add. Positive sums multiply the quality score; negative sums multiply its absolute value, always giving a negative result unless quality is zero. Unmatched records and zero sums are excluded.
 - Set top N (up to 100,000), minimum votes, exclusions, movie policy, and manual/unweighted/vote-weighted baseline. Baseline diagnostics use rated movies and episodes, excluding TV movies and parent series.
 - Best mode selects descending scores. Worst mode selects ascending scores and explicitly lets you choose multiplying relevance or filtering only.
 - Watched policies are distinct: include; select top N then hide watched; or select top N from unwatched records. Hidden records and explicit exclusions are removed before selection.

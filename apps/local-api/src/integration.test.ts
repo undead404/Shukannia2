@@ -59,6 +59,11 @@ describe('catalog, persistence, and local API', () => {
               watched_policy,
               worst_relevance,
               top_n: 5,
+              tags: [
+                { name: 'Action', weight: -0.7 },
+                { name: 'Drama', weight: -0.3 },
+                { name: 'Comedy', weight: 0 },
+              ],
             });
             const states = [
               {

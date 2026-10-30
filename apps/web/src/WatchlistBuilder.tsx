@@ -66,7 +66,9 @@ export function WatchlistBuilder({ model }: { model: AppModel }) {
           </label>
           <div className="form-section-heading">
             <span>Genres & relevance</span>
-            <small>Highest matching weight applies</small>
+            <small>
+              Matching relevances add; negative sums always penalize
+            </small>
           </div>
           <GenreFields model={model} />
           <WeightFields model={model} />
@@ -85,7 +87,7 @@ export function WatchlistBuilder({ model }: { model: AppModel }) {
                   })
                 }
               >
-                <option value="multiply">Multiply score by relevance</option>
+                <option value="multiply">Apply signed relevance</option>
                 <option value="filterOnly">
                   Use relevance as a filter only
                 </option>
@@ -130,7 +132,7 @@ export function WatchlistBuilder({ model }: { model: AppModel }) {
           <div className="formula-note">
             <Sparkles size={16} />
             <div>
-              Votes × (rating − baseline) × relevance
+              A = votes × (rating − baseline); score = r × (r &lt; 0 ? |A| : A)
               <small>
                 Top N by score → chronological by year. No prerequisite episodes
                 added.

@@ -58,15 +58,24 @@ export function Detail({
                 ? 'Fictional demo metadata'
                 : 'IMDb title genres'}
           </dd>
-          <dt>Relevance weight</dt>
-          <dd>{item.relevance}×</dd>
+          <dt>Summed relevance</dt>
+          <dd>{item.relevance.toFixed(3)}</dd>
           <dt>Discovery score</dt>
           <dd>{number(item.score)}</dd>
         </dl>
         <div className="formula-note">
-          {number(item.num_votes)} × ({item.average_rating} −{' '}
-          {baseline.toFixed(3)}) ×{' '}
-          {filterOnly ? '1 (relevance used as a filter only)' : item.relevance}
+          {filterOnly ? (
+            <>
+              {number(item.num_votes)} × ({item.average_rating} −{' '}
+              {baseline.toFixed(3)}) (genre filter only)
+            </>
+          ) : (
+            <>
+              {item.relevance.toFixed(3)} × {item.relevance < 0 ? '| ' : '('}
+              {number(item.num_votes)} × ({item.average_rating} −{' '}
+              {baseline.toFixed(3)}){item.relevance < 0 ? ' |' : ')'}
+            </>
+          )}
         </div>
         <p className="muted small">
           Year-level chronology. Within-year order is by IMDb ID.

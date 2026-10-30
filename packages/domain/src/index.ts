@@ -27,7 +27,7 @@ export const Watchlist = z.object({
   top_n: z.number().int().min(1).max(100000),
   tags: z
     .array(
-      z.object({ name: Genre, weight: z.number().min(0).max(10).default(1) }),
+      z.object({ name: Genre, weight: z.number().min(-1).max(1).default(1) }),
     )
     .min(1)
     .max(30),
@@ -122,7 +122,10 @@ export const score = (
   rating: number,
   baseline: number,
   weight = 1,
-): number => votes * (rating - baseline) * weight;
+): number => {
+  const quality = votes * (rating - baseline);
+  return weight * (weight < 0 ? Math.abs(quality) : quality);
+};
 export function diagnostics(titles: Title[]): Diagnostics {
   // Baseline universe is rated movies and episodes, independently of TV-movie policy.
   titles = titles.filter((t) => t.title_type !== 'tvMovie');
@@ -165,8 +168,10 @@ export function rank(
     if (isExcluded(t, state, config, excludedIds)) continue;
     const matching = t.genres.filter((g) => weights.has(g));
     if (!matching.length) continue;
-    const relevance = Math.max(...matching.map((g) => weights.get(g) ?? 1));
-    // A zero relevance is an explicit exclusion; it must not outrank negative records.
+    const relevance = matching.reduce(
+      (sum, g) => sum + (weights.get(g) ?? 0),
+      0,
+    );
     if (relevance === 0) continue;
     candidates.push({
       ...t,

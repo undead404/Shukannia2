@@ -191,19 +191,20 @@ export async function generate(
     sql` UNION ALL `,
   );
   // Inputs are always bound parameters, including JSON arrays used to avoid SQLite's variable limit.
-  const relevance =
+  const quality = sql`t.num_votes*(t.average_rating-${baseline})`;
+  const weightedScore =
     config.mode === 'worst' && config.worst_relevance === 'filterOnly'
-      ? sql`1`
-      : sql`MAX(w.weight)`;
+      ? quality
+      : sql`SUM(w.weight) * CASE WHEN SUM(w.weight)<0 THEN ABS(${quality}) ELSE ${quality} END`;
   const order = config.mode === 'worst' ? sql`ASC` : sql`DESC`;
   const result = await sql`
     WITH weights AS (${weights}), candidates AS (
-      SELECT t.imdb_id, t.num_votes*(t.average_rating-${baseline})*${relevance} AS score, MAX(w.weight) AS relevance
+      SELECT t.imdb_id, ${weightedScore} AS score, SUM(w.weight) AS relevance
       FROM title t JOIN title_tag tt ON tt.imdb_id=t.imdb_id JOIN weights w ON w.name=tt.name
       WHERE t.num_votes>=${config.min_votes} AND (${config.include_tv_movies ? 1 : 0}=1 OR t.title_type!='tvMovie')
       AND t.imdb_id NOT IN (SELECT value FROM json_each(${JSON.stringify([...hidden, ...config.excluded_ids])}))
       AND NOT EXISTS (SELECT 1 FROM title_tag ex WHERE ex.imdb_id=t.imdb_id AND ex.name IN (SELECT value FROM json_each(${JSON.stringify(config.excluded_tags)})))
-      GROUP BY t.imdb_id HAVING MAX(w.weight)>0
+      GROUP BY t.imdb_id HAVING SUM(w.weight)!=0
     ), chosen AS (SELECT *, ROW_NUMBER() OVER (ORDER BY score ${order}, imdb_id) AS rank FROM candidates ORDER BY score ${order}, imdb_id LIMIT ${config.top_n})
     SELECT t.*, c.score, c.relevance, c.rank FROM chosen c JOIN title t ON t.imdb_id=c.imdb_id
     ORDER BY t.original_year IS NULL, t.original_year, t.imdb_id`.execute(db);

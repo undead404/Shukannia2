@@ -9,8 +9,8 @@ export function WeightFields({ model }: { model: AppModel }) {
           <input
             aria-label={`${tag.name} relevance weight`}
             type="number"
-            min="0"
-            max="10"
+            min="-1"
+            max="1"
             step="0.1"
             value={tag.weight}
             onChange={(e) =>
@@ -24,7 +24,7 @@ export function WeightFields({ model }: { model: AppModel }) {
               })
             }
           />
-          <span>× relevance</span>
+          <span>relevance</span>
         </label>
       ))}
     </div>

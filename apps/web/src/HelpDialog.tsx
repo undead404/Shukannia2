@@ -28,7 +28,7 @@ export function HelpDialog({ model }: { model: AppModel }) {
           baseline.
         </p>
         <div className="formula-note">
-          score = votes × (rating − baseline) × relevance
+          A = votes × (rating − baseline); score = r × (r &lt; 0 ? |A| : A)
         </div>
         <p>
           We select the top N by score, then sort those stories by original
@@ -36,9 +36,12 @@ export function HelpDialog({ model }: { model: AppModel }) {
           exact release order is unknown. Missing years come last.
         </p>
         <p>
-          No matching genre means no match. Multiple genres use the highest
-          matching weight. A zero weight excludes a record. Negative scores stay
-          negative.
+          No matching genre means no match. Matching genre relevances add
+          together to give r. Positive sums multiply the quality score A.
+          Negative sums multiply the absolute value of A, making the result
+          negative whether the title is above or below baseline. A zero sum
+          excludes the title. Use excluded genres to remove titles regardless of
+          other matches.
         </p>
         <p>
           Episodes can appear on their own, without the episodes before or after
