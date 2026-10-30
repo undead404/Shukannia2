@@ -5,6 +5,7 @@ import { DiagnosticsPage } from './DiagnosticsPage.js';
 import { HelpDialog } from './HelpDialog.js';
 import { HistoryPage } from './HistoryPage.js';
 import { Sidebar } from './Sidebar.js';
+import { TimelineDebugPanel } from './TimelineDebugPanel.js';
 import { TimelinePage } from './TimelinePage.js';
 import { useAppModel } from './useAppModel.js';
 import { WatchlistBuilder } from './WatchlistBuilder.js';
@@ -54,6 +55,7 @@ export function App() {
           </button>
         </header>
         <div className="main-content">
+          <TimelineDebugPanel />
           {error && (
             <div role="alert" className="error-banner">
               {error}

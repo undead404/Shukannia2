@@ -11,6 +11,7 @@ import {
   WatchState,
 } from '@shukannia/domain';
 
+import { traceTimeline } from './timelineDebug.js';
 import { api, initial, Ok } from './utils.js';
 export type Page = 'timeline' | 'history' | 'diagnostics';
 export function useAppModel() {
@@ -53,11 +54,13 @@ export function useAppModel() {
   }
   useEffect(() => {
     let active = true;
+    traceTimeline('model-mounted');
     void api('bootstrap', Bootstrap)
       .then(async (b) => {
         if (!active) return;
         setBoot(b);
         const w = b.watchlists[0] ?? initial();
+        traceTimeline('bootstrap-loaded', { topN: w.top_n });
         if (!b.tags.includes(w.tags[0]?.name ?? '') && b.tags[0])
           w.tags = [{ name: b.tags[0], weight: 1 }];
         setConfig(w);
@@ -71,9 +74,11 @@ export function useAppModel() {
       });
     return () => {
       active = false;
+      traceTimeline('model-unmounted');
     };
   }, []);
   async function run(w = config) {
+    traceTimeline('generate-requested', { topN: w.top_n });
     setBusy(true);
     setError('');
     try {
@@ -82,6 +87,7 @@ export function useAppModel() {
       const r = await api('generate', GenerateResponse, valid);
       setConfig(valid);
       setResult(r);
+      setVisibleLimit(100);
       await refresh();
       setBuilder(false);
       setPage('timeline');
@@ -93,6 +99,13 @@ export function useAppModel() {
     }
   }
   async function changeState(id: string, patch: Partial<WatchState>) {
+    traceTimeline('state-change-started', {
+      fields: Object.keys(patch),
+      visibleLimit,
+      configTopN: config.top_n,
+      resultTopN: result?.config.top_n,
+      resultCount: result?.items.length,
+    });
     setError('');
     try {
       const existing = boot?.states.find((s) => s.imdb_id === id);
@@ -107,7 +120,14 @@ export function useAppModel() {
       });
       await api('state', WatchState, state, 'PUT');
       await refresh();
-      if (result) setResult(await api('generate', GenerateResponse, config));
+      if (result) {
+        const updated = await api('generate', GenerateResponse, config);
+        traceTimeline('state-change-results', {
+          topN: updated.config.top_n,
+          count: updated.items.length,
+        });
+        setResult(updated);
+      }
       setNotice(
         state.hidden
           ? 'Title hidden from future selections.'
@@ -183,8 +203,12 @@ export function useAppModel() {
     return () => window.removeEventListener('keydown', close);
   }, [result]);
   useEffect(() => {
+    traceTimeline('limit-reset: search-or-type', {
+      searchLength: search.length,
+      kind,
+    });
     setVisibleLimit(100);
-  }, [result, search, kind]);
+  }, [search, kind]);
   const items =
     result?.items.filter(
       (t) =>
@@ -197,6 +221,18 @@ export function useAppModel() {
           .includes(search.toLowerCase()),
     ) ?? [];
   const watched = boot?.states.filter((s) => s.watched_at).length ?? 0;
+  useEffect(() => {
+    traceTimeline('timeline-rendered', {
+      visibleLimit,
+      resultCount: result?.items.length ?? 0,
+      matchingCount: items.length,
+      displayedCount: Math.min(visibleLimit, items.length),
+      configTopN: config.top_n,
+      resultTopN: result?.config.top_n,
+      kind,
+      searchLength: search.length,
+    });
+  }, [visibleLimit, result, items.length, config.top_n, kind, search]);
   const movieCount =
     result?.items.filter((t) => t.title_type !== 'tvEpisode').length ?? 0;
   const episodeCount = (result?.visible ?? 0) - movieCount;
