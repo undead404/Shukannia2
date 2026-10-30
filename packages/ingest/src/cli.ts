@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-import { userDb } from '../../db/src/index.js';
+import { userDb } from '@shukannia/db';
+
 import { createDemo } from './demo.js';
 import { importSnapshots, rollback, updateCatalog } from './importer.js';
 const args = z.array(z.string()).parse(process.argv.slice(2));

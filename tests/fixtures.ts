@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 
-import { Watchlist } from '../packages/domain/src/index.js';
+import { Watchlist } from '@shukannia/domain';
 export function config(patch: Partial<Watchlist> = {}): Watchlist {
   return Watchlist.parse({
     id: randomUUID(),

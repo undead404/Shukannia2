@@ -10,7 +10,7 @@
     "dev": "concurrently -k -n api,web 'tsx watch apps/local-api/src/server.ts' 'vite --config apps/web/vite.config.ts'",
     "build": "tsc --noEmit && vite build --config apps/web/vite.config.ts",
     "start": "tsx apps/local-api/src/server.ts",
-    "test": "vitest run",
+    "test": "node --test tooling/*.check.mjs && vitest run",
     "typecheck": "tsc --noEmit",
     "ingest": "tsx packages/ingest/src/cli.ts import",
     "catalog:update": "tsx packages/ingest/src/cli.ts update",
@@ -39,6 +39,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@shukannia/db": "workspace:*",
+    "@shukannia/domain": "workspace:*",
+    "@shukannia/ingest": "workspace:*",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",

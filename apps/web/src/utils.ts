@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { Watchlist } from '../../../packages/domain/src/index.js';
+import { Watchlist } from '@shukannia/domain';
 export async function api<T>(
   path: string,
   schema: z.ZodType<T>,

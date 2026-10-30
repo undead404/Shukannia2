@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { RankedTitle, WatchState } from '../../../packages/domain/src/index.js';
+import { RankedTitle, WatchState } from '@shukannia/domain';
 export function HistoryRow({
   state,
   title,

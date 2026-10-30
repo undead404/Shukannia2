@@ -1,5 +1,10 @@
 {
   "name": "@shukannia/local-api",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@shukannia/db": "workspace:*",
+    "@shukannia/domain": "workspace:*",
+    "@shukannia/ingest": "workspace:*"
+  }
 }

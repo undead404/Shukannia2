@@ -1,4 +1,5 @@
-import { RankedTitle } from '../../../packages/domain/src/index.js';
+import { RankedTitle } from '@shukannia/domain';
+
 import { compact, number } from './utils.js';
 export function ScoreDistribution({ items }: { items: RankedTitle[] }) {
   if (!items.length) return null;

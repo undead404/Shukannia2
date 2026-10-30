@@ -11,8 +11,9 @@ import {
   dataDir,
   insertTitles,
   migrateCatalog,
-} from '../../db/src/index.js';
-import { CatalogInfo, Pointer, Title } from '../../domain/src/index.js';
+} from '@shukannia/db';
+import { CatalogInfo, Pointer, Title } from '@shukannia/domain';
+
 import {
   activate,
   finishCatalog,

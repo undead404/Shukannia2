@@ -17,7 +17,7 @@ import {
   restore,
   states,
   userDb,
-} from '../../../packages/db/src/index.js';
+} from '@shukannia/db';
 import {
   Backup,
   Bootstrap,
@@ -25,8 +25,8 @@ import {
   ScorePreview,
   Watchlist,
   WatchState,
-} from '../../../packages/domain/src/index.js';
-import { createDemo } from '../../../packages/ingest/src/demo.js';
+} from '@shukannia/domain';
+import { createDemo } from '@shukannia/ingest/demo';
 
 export async function createApp() {
   const app = Fastify({ logger: true, bodyLimit: 32 * 1024 * 1024 });

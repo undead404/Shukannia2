@@ -5,6 +5,8 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+import workspaceImports from './tooling/workspace-imports.mjs';
+
 export default tseslint.config(
   {
     ignores: [
@@ -47,9 +49,25 @@ export default tseslint.config(
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,tsx}'],
-    plugins: { 'simple-import-sort': simpleImportSort },
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+      workspace: { rules: { imports: workspaceImports } },
+    },
     rules: {
-      'simple-import-sort/imports': 'error',
+      'workspace/imports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            ['^\\u0000'],
+            ['^node:'],
+            ['^@?\\w'],
+            ['^@shukannia/'],
+            ['^'],
+            ['^\\.'],
+          ],
+        },
+      ],
       'simple-import-sort/exports': 'error',
       'max-lines': [
         'error',

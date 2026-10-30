@@ -1,4 +1,5 @@
-import { GenerateResponse } from '../../../packages/domain/src/index.js';
+import { GenerateResponse } from '@shukannia/domain';
+
 import { AppModel } from './useAppModel.js';
 import { compact } from './utils.js';
 export function ScorePreviewPanel({ model }: { model: AppModel }) {

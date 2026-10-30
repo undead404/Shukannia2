@@ -9,8 +9,8 @@ import {
   computeDiagnostics,
   connect,
   generate,
-} from '../../db/src/index.js';
-import { CatalogInfo, Pointer, Watchlist } from '../../domain/src/index.js';
+} from '@shukannia/db';
+import { CatalogInfo, Pointer, Watchlist } from '@shukannia/domain';
 export async function withUpdateLock<T>(
   dir: string,
   task: () => Promise<T>,

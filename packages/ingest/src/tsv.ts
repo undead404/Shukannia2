@@ -6,7 +6,7 @@ import { createGunzip } from 'node:zlib';
 
 import { z } from 'zod';
 
-import { ImdbId } from '../../domain/src/index.js';
+import { ImdbId } from '@shukannia/domain';
 export const nullableInt = z.preprocess(
   (v) => (v === '\\N' ? null : v),
   z.union([z.null(), z.string().regex(/^\d+$/).transform(Number)]),

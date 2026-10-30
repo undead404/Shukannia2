@@ -6,7 +6,6 @@ import { gzipSync } from 'node:zlib';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { createApp } from '../apps/local-api/src/server.js';
 import {
   activeCatalog,
   backup,
@@ -16,16 +15,18 @@ import {
   putState,
   restore,
   userDb,
-} from '../packages/db/src/index.js';
-import { GenerateResponse, rank } from '../packages/domain/src/index.js';
-import { createDemo, demoTitles } from '../packages/ingest/src/demo.js';
+} from '@shukannia/db';
+import { GenerateResponse, rank } from '@shukannia/domain';
+import { createDemo, demoTitles } from '@shukannia/ingest/demo';
 import {
   importSnapshots,
   rollback,
   updateCatalog,
   withUpdateLock,
-} from '../packages/ingest/src/importer.js';
-import { config, fixture } from './fixtures.js';
+} from '@shukannia/ingest/importer';
+
+import { config, fixture } from '../../../tests/fixtures.js';
+import { createApp } from './server.js';
 const dirs: string[] = [];
 async function temp() {
   const d = await mkdtemp(join(tmpdir(), 'shukannia-test-'));

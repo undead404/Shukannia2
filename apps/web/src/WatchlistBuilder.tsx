@@ -7,7 +7,8 @@ import {
   X,
 } from 'lucide-react';
 
-import { Watchlist } from '../../../packages/domain/src/index.js';
+import { Watchlist } from '@shukannia/domain';
+
 import { GenreFields } from './GenreFields.js';
 import { RankingFields } from './RankingFields.js';
 import { ScorePreviewPanel } from './ScorePreviewPanel.js';

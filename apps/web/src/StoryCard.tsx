@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, Film, Tv } from 'lucide-react';
 
-import { RankedTitle } from '../../../packages/domain/src/index.js';
+import { RankedTitle } from '@shukannia/domain';
+
 import { AppModel } from './useAppModel.js';
 import { compact } from './utils.js';
 export function StoryCard({ model, t }: { model: AppModel; t: RankedTitle }) {

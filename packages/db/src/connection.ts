@@ -5,7 +5,7 @@ import Sqlite from 'better-sqlite3';
 import { Kysely, sql, SqliteDialect } from 'kysely';
 import { z } from 'zod';
 
-import { Title } from '../../domain/src/index.js';
+import { Title } from '@shukannia/domain';
 export interface Database {
   title: Omit<Title, 'genres'> & { genres: string };
   title_tag: { imdb_id: string; name: string };

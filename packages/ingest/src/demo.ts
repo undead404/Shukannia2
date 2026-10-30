@@ -2,13 +2,9 @@ import { randomUUID } from 'node:crypto';
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import {
-  connect,
-  dataDir,
-  insertTitles,
-  migrateCatalog,
-} from '../../db/src/index.js';
-import { Title } from '../../domain/src/index.js';
+import { connect, dataDir, insertTitles, migrateCatalog } from '@shukannia/db';
+import { Title } from '@shukannia/domain';
+
 import { finishCatalog, withUpdateLock } from './importer.js';
 
 // Fictional records with illustrative ratings: never presented as an IMDb snapshot.

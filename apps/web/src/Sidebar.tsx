@@ -10,7 +10,8 @@ import {
   Upload,
 } from 'lucide-react';
 
-import { Backup } from '../../../packages/domain/src/index.js';
+import { Backup } from '@shukannia/domain';
+
 import { AppModel } from './useAppModel.js';
 import { api, download, initial } from './utils.js';
 export function Sidebar({ model }: { model: AppModel }) {

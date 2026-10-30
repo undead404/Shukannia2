@@ -1,4 +1,5 @@
-import { Watchlist } from '../../../packages/domain/src/index.js';
+import { Watchlist } from '@shukannia/domain';
+
 import { AppModel } from './useAppModel.js';
 export function RankingFields({ model }: { model: AppModel }) {
   const { config, setConfig } = model;

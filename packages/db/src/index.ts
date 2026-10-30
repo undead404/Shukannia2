@@ -14,7 +14,8 @@ import {
   Title,
   Watchlist,
   WatchState,
-} from '../../domain/src/index.js';
+} from '@shukannia/domain';
+
 import { connect, Database, dataDir } from './connection.js';
 export { connect, dataDir, migrateCatalog } from './connection.js';
 export async function userDb(dir = dataDir()): Promise<Kysely<Database>> {

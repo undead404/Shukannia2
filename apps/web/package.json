@@ -1,5 +1,8 @@
 {
   "name": "@shukannia/web",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@shukannia/domain": "workspace:*"
+  }
 }

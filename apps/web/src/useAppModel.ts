@@ -9,7 +9,8 @@ import {
   ScorePreview,
   Watchlist,
   WatchState,
-} from '../../../packages/domain/src/index.js';
+} from '@shukannia/domain';
+
 import { api, initial, Ok } from './utils.js';
 export type Page = 'timeline' | 'history' | 'diagnostics';
 export function useAppModel() {

@@ -2,13 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { describe, expect, it } from 'vitest';
 
-import {
-  diagnostics,
-  rank,
-  score,
-  Title,
-  Watchlist,
-} from '../packages/domain/src/index.js';
+import { diagnostics, rank, score, Title, Watchlist } from '@shukannia/domain';
 const config = (patch: Partial<Watchlist> = {}): Watchlist =>
   Watchlist.parse({
     id: randomUUID(),

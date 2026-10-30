@@ -1,5 +1,13 @@
 {
   "name": "@shukannia/ingest",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "exports": {
+    "./demo": "./src/demo.ts",
+    "./importer": "./src/importer.ts"
+  },
+  "dependencies": {
+    "@shukannia/db": "workspace:*",
+    "@shukannia/domain": "workspace:*"
+  }
 }
